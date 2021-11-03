@@ -12,6 +12,10 @@ const plantSchema = new Schema({
   species: {
     type: String,
   },
+  waterings: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Watering',
+  }]
 });
 
 export default model('Plant', plantSchema);
