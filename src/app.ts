@@ -1,7 +1,10 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import { urlencoded } from 'body-parser';
+import dotenv from 'dotenv';
 import routes from './routes/routes';
+
+dotenv.config();
 
 const app = express();
 
@@ -13,9 +16,9 @@ app.get('/', (req, res) => {
 
 app.use(routes);
 
-mongoose.connect('mongodb+srv://admin:adminpass@pls-plants-dont-die.xf5i7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@pls-plants-dont-die.xf5i7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`)
 .then((_) => {  
-  app.listen(5000, () => {
+  app.listen(process.env.PORT, () => {
     console.log('Server running');
   });
 })
